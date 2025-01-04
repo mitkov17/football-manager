@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: football-manager
+  datasource:
+    url: jdbc:postgresql://localhost:5432/FootballManagerDB
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 171101
+  liquibase:
+    enabled: true
+    change-log: classpath:/liquibase/db.changelog-master.xml
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration

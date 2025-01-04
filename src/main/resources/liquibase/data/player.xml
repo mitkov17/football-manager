@@ -1,0 +1,68 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd"
+                   logicalFilePath="data/player.xml">
+
+    <changeSet id="01-player" author="MaksymMitkov">
+        <createTable tableName="player">
+            <column name="id" type="BIGINT" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="experience" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="team_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="player" />
+        </rollback>
+    </changeSet>
+
+    <changeSet id="02-player" author="MaksymMitkov">
+        <createSequence sequenceName="player_sequence" startValue="3"/>
+        <rollback>
+            <dropSequence sequenceName="player_sequence"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="04-player" author="MaksymMitkov">
+        <addForeignKeyConstraint
+                baseTableName="player"
+                baseColumnNames="team_id"
+                referencedTableName="team"
+                referencedColumnNames="id"
+                constraintName="fk_player_team"/>
+    </changeSet>
+
+    <changeSet id="05-player" author="MaksymMitkov">
+        <insert tableName="player">
+            <column name="id" value="1"/>
+            <column name="name" value="John"/>
+            <column name="surname" value="Doe"/>
+            <column name="date_of_birth" value="1990-05-15"/>
+            <column name="experience" value="120"/>
+            <column name="team_id" value="1"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="2"/>
+            <column name="name" value="Jane"/>
+            <column name="surname" value="Smith"/>
+            <column name="date_of_birth" value="1995-07-10"/>
+            <column name="experience" value="80"/>
+            <column name="team_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

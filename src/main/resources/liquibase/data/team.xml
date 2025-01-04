@@ -1,0 +1,49 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd"
+                   logicalFilePath="data/team.xml">
+
+    <changeSet id="01-team" author="MaksymMitkov">
+        <createTable tableName="team">
+            <column name="id" type="BIGINT" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="budget" type="DECIMAL(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commission" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="team" />
+        </rollback>
+    </changeSet>
+
+    <changeSet id="02-team" author="MaksymMitkov">
+        <createSequence sequenceName="team_sequence" startValue="3"/>
+        <rollback>
+            <dropSequence sequenceName="team_sequence"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="03-team" author="MaksymMitkov">
+        <insert tableName="team">
+            <column name="id" value="1"/>
+            <column name="name" value="Team A"/>
+            <column name="budget" value="5000000.00"/>
+            <column name="commission" value="5"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" value="2"/>
+            <column name="name" value="Team B"/>
+            <column name="budget" value="7000000.00"/>
+            <column name="commission" value="10"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
