@@ -34,13 +34,13 @@
     <changeSet id="03-team" author="MaksymMitkov">
         <insert tableName="team">
             <column name="id" value="1"/>
-            <column name="name" value="Team A"/>
+            <column name="name" value="North"/>
             <column name="budget" value="5000000.00"/>
             <column name="commission" value="5"/>
         </insert>
         <insert tableName="team">
             <column name="id" value="2"/>
-            <column name="name" value="Team B"/>
+            <column name="name" value="Gold Lion"/>
             <column name="budget" value="7000000.00"/>
             <column name="commission" value="10"/>
         </insert>

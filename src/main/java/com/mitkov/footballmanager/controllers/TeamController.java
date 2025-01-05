@@ -6,7 +6,7 @@ import com.mitkov.footballmanager.dto.TeamDTO;
 import com.mitkov.footballmanager.dto.TeamResponseDTO;
 import com.mitkov.footballmanager.models.Team;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +15,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/teams")
+@RequiredArgsConstructor
 public class TeamController {
 
     private final TeamConverter teamConverter;
 
     private final TeamDAO teamDAO;
-
-    @Autowired
-    public TeamController(TeamConverter teamConverter, TeamDAO teamDAO) {
-        this.teamConverter = teamConverter;
-        this.teamDAO = teamDAO;
-    }
 
     @GetMapping()
     public List<TeamResponseDTO> getAllTeams() {
@@ -39,9 +34,9 @@ public class TeamController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> saveTeam(@Valid @RequestBody TeamDTO teamDTO) {
+    public ResponseEntity<String> createTeam(@Valid @RequestBody TeamDTO teamDTO) {
         Team team = teamConverter.convertToTeam(teamDTO);
-        teamDAO.saveTeam(team);
+        teamDAO.createTeam(team);
         return ResponseEntity.ok("The team has been saved successfully");
     }
 

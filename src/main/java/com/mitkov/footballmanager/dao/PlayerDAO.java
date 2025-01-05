@@ -6,9 +6,9 @@ import com.mitkov.footballmanager.exceptions.PlayerNotFoundException;
 import com.mitkov.footballmanager.exceptions.TeamNotFoundException;
 import com.mitkov.footballmanager.models.Player;
 import com.mitkov.footballmanager.models.Team;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,20 +18,16 @@ import java.time.Period;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class PlayerDAO {
 
     private final SessionFactory sessionFactory;
 
-    @Autowired
-    public PlayerDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     public List<Player> getAllPlayers() {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("select p from Player p", Player.class).getResultList();
+        return session.createQuery("SELECT p FROM Player p", Player.class).getResultList();
     }
 
     public Player getPlayer(Long id) {
@@ -44,10 +40,10 @@ public class PlayerDAO {
     }
 
     @Transactional
-    public void savePlayer(Player player) {
+    public void createPlayer(Player player) {
         Session session = sessionFactory.getCurrentSession();
 
-        long count = session.createQuery("select count(p) from Player p where p.name = :name and p.surname = :surname and p.dateOfBirth = :dateOfBirth", Long.class)
+        long count = session.createQuery("SELECT count(p) FROM Player p WHERE p.name = :name AND p.surname = :surname AND p.dateOfBirth = :dateOfBirth", Long.class)
                 .setParameter("name", player.getName())
                 .setParameter("surname", player.getSurname())
                 .setParameter("dateOfBirth", player.getDateOfBirth())
@@ -108,7 +104,7 @@ public class PlayerDAO {
         double totalCost = transferCost + commission;
 
         if (targetTeam.getBudget().compareTo(BigDecimal.valueOf(totalCost)) < 0) {
-            throw new InsufficientBudgetException("Target team does not have enough budget for this transfer.");
+            throw new InsufficientBudgetException();
         }
 
         targetTeam.setBudget(targetTeam.getBudget().subtract(BigDecimal.valueOf(totalCost)));

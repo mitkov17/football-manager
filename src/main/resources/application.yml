@@ -2,10 +2,10 @@ spring:
   application:
     name: football-manager
   datasource:
-    url: jdbc:postgresql://localhost:5432/FootballManagerDB
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/FootballManagerDB}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 171101
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:171101}
   liquibase:
     enabled: true
     change-log: classpath:/liquibase/db.changelog-master.xml

@@ -49,18 +49,34 @@
     <changeSet id="05-player" author="MaksymMitkov">
         <insert tableName="player">
             <column name="id" value="1"/>
-            <column name="name" value="John"/>
-            <column name="surname" value="Doe"/>
-            <column name="date_of_birth" value="1990-05-15"/>
-            <column name="experience" value="120"/>
+            <column name="name" value="Jon"/>
+            <column name="surname" value="Snow"/>
+            <column name="date_of_birth" value="2001-05-15"/>
+            <column name="experience" value="80"/>
             <column name="team_id" value="1"/>
         </insert>
         <insert tableName="player">
             <column name="id" value="2"/>
-            <column name="name" value="Jane"/>
-            <column name="surname" value="Smith"/>
-            <column name="date_of_birth" value="1995-07-10"/>
-            <column name="experience" value="80"/>
+            <column name="name" value="Robb"/>
+            <column name="surname" value="Stark"/>
+            <column name="date_of_birth" value="2000-07-10"/>
+            <column name="experience" value="60"/>
+            <column name="team_id" value="1"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="3"/>
+            <column name="name" value="Jaime"/>
+            <column name="surname" value="Lannister"/>
+            <column name="date_of_birth" value="2002-10-10"/>
+            <column name="experience" value="70"/>
+            <column name="team_id" value="2"/>
+        </insert>
+        <insert tableName="player">
+            <column name="id" value="4"/>
+            <column name="name" value="Tyrion"/>
+            <column name="surname" value="Lannister"/>
+            <column name="date_of_birth" value="1999-08-11"/>
+            <column name="experience" value="65"/>
             <column name="team_id" value="2"/>
         </insert>
     </changeSet>

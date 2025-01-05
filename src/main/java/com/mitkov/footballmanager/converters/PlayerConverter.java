@@ -6,18 +6,14 @@ import com.mitkov.footballmanager.dto.PlayerResponseDTO;
 import com.mitkov.footballmanager.exceptions.TeamNotFoundException;
 import com.mitkov.footballmanager.models.Player;
 import com.mitkov.footballmanager.models.Team;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class PlayerConverter {
 
     private final TeamDAO teamDAO;
-
-    @Autowired
-    public PlayerConverter(TeamDAO teamDAO) {
-        this.teamDAO = teamDAO;
-    }
 
     public Player convertToPlayer(PlayerDTO playerDTO) {
         Player player = new Player();
@@ -42,7 +38,7 @@ public class PlayerConverter {
         playerResponseDTO.setId(player.getId());
         playerResponseDTO.setName(player.getName());
         playerResponseDTO.setSurname(player.getSurname());
-        playerResponseDTO.setDateOfBirth(player.getDateOfBirth().toString());
+        playerResponseDTO.setDateOfBirth(player.getDateOfBirth());
         playerResponseDTO.setExperience(player.getExperience());
 
         return playerResponseDTO;

@@ -3,24 +3,20 @@ package com.mitkov.footballmanager.dao;
 import com.mitkov.footballmanager.exceptions.TeamAlreadyExistsException;
 import com.mitkov.footballmanager.exceptions.TeamNotFoundException;
 import com.mitkov.footballmanager.models.Team;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TeamDAO {
 
     private final SessionFactory sessionFactory;
-
-    @Autowired
-    public TeamDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     public List<Team> getAllTeams() {
         Session session = sessionFactory.getCurrentSession();
@@ -41,10 +37,10 @@ public class TeamDAO {
     }
 
     @Transactional
-    public void saveTeam(Team team) {
+    public void createTeam(Team team) {
         Session session = sessionFactory.getCurrentSession();
 
-        long count = session.createQuery("select count(t) from Team t where t.name = :name", Long.class)
+        long count = session.createQuery("SELECT count(t) FROM Team t WHERE t.name = :name", Long.class)
                 .setParameter("name", team.getName())
                 .getSingleResult();
 
