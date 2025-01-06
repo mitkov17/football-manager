@@ -7,7 +7,7 @@ Football Manager Application is a RESTful API application designed to manage foo
 
 1. Configure the application:
    - Open the `runApplication.bat` file in the root directory.
-   - Replace the placeholders with your actual database credentials and JWT secret:
+   - Replace the placeholders with your actual database credentials:
      ```bat
      @echo off
 
