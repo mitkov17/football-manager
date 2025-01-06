@@ -31,7 +31,7 @@
     </changeSet>
 
     <changeSet id="02-player" author="MaksymMitkov">
-        <createSequence sequenceName="player_sequence" startValue="3"/>
+        <createSequence sequenceName="player_sequence" startValue="5"/>
         <rollback>
             <dropSequence sequenceName="player_sequence"/>
         </rollback>
